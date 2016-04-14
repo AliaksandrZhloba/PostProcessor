@@ -41,7 +41,7 @@
 					<StackPanel Orientation="Vertical">
 						<RadioButton Content="Спросить пользователя" Margin="2" IsChecked="{Binding Path=OnProgramErrorAction, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static E:OnProgramErrorActionType.Ask}}" />
 						<RadioButton Content="Отправлять сообщение" Margin="2" IsChecked="{Binding Path=OnProgramErrorAction, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static E:OnProgramErrorActionType.Send}}" />
-						<RadioButton Content="Не отправлять сообщение" Margin="2" IsChecked="{Binding Path=OnProgramErrorAction, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static E:OnProgramErrorActionType.Ignore}}" />
+						<RadioButton Content="Игнорировать" Margin="2" IsChecked="{Binding Path=OnProgramErrorAction, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static E:OnProgramErrorActionType.Ignore}}" />
 					</StackPanel>
 				</GroupBox>
 			</StackPanel>
