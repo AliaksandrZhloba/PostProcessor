@@ -1,0 +1,39 @@
+﻿<Window x:Class="PostProcessor.Windows.ErrorMessageWindow"
+	   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	   Title="Необрабатываемое исключение" Height="300" Width="480"
+	   ResizeMode="NoResize"
+	   WindowStartupLocation="CenterScreen">
+
+	<Grid Margin="2">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Grid Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			<Image Grid.Column="0" Margin="5,2,5,2" Source="/Resources/Sad.png" SnapsToDevicePixels="True" Stretch="Uniform" Width="48" />
+			<TextBlock Grid.Column="1" Margin="4" TextWrapping="Wrap" TextAlignment="Justify">
+				Приложение аварийно завершено. <LineBreak />
+				Для более оперативного исправления приложения отправьте сообщение об ошибке разработчику.
+			</TextBlock>
+		</Grid>
+		<Grid Grid.Row="1" Margin="5">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<TextBlock Grid.Row="0" Margin="2" Text="Сообщение об ошибке:" />
+			<TextBox Grid.Row="1" Margin="2" x:Name="txtErrorMessage" TextWrapping="Wrap" IsReadOnly="True" VerticalScrollBarVisibility="Auto" />
+		</Grid>
+		<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+			<CheckBox x:Name="cbRememberAnswer" Margin="10,2,10,2" Content="Запомнить ответ" VerticalAlignment="Center" />
+			<Button x:Name="btnSend" Margin="4" Content="Отправить" Width="100" Height="32" Click="btnSend_Click" />
+			<Button x:Name="btnIgnore" Margin="4" Content="Игнорировать" Width="100" Height="32" Click="btnIgnore_Click" />
+		</StackPanel>
+	</Grid>
+</Window>

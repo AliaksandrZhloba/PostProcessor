@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="PostProcessor.UserControls.SelectMatherial"
+		   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		   xmlns:UCs="clr-namespace:PostProcessor.UserControls"
+		   DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+		<TextBlock Grid.Row="0" Grid.Column="0" Margin="2" Padding="2" Text="Материал:" />
+		<ComboBox x:Name="cbMatherial" Grid.Row="0" Grid.Column="1" Margin="2" Padding="2" DisplayMemberPath="Name" KeyboardNavigation.TabNavigation="None" KeyboardNavigation.IsTabStop="False"
+				ItemsSource="{Binding Matherials}" SelectedValue="{Binding SourceMatherial}" />
+		<Button Grid.Row="0" Grid.Column="2" Margin="2" Padding="2" Content="Edit" IsEnabled="False" />
+		<UCs:MatherialView x:Name="mvCurrentMatherial" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="2"
+					    DataContext="{Binding CurrentMatherial}" />
+		<Button Grid.Row="1" Grid.Column="2" Margin="2" Padding="2" Content="Default" KeyboardNavigation.TabNavigation="None" KeyboardNavigation.IsTabStop="False"
+			   Click="SetMatherialDefaultsButton_Click" />
+	</Grid>
+</UserControl>

@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="PostProcessor.UserControls.ProcessSettingsView"
+		   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		   xmlns:C="clr-namespace:PostProcessor.Converters"
+		   DataContext="{Binding Settings, RelativeSource={RelativeSource Self}}">
+
+	<UserControl.Resources>
+		<C:UIntConverter x:Key="UIntConverter" />
+	</UserControl.Resources>
+
+	<StackPanel Orientation="Vertical">
+		<CheckBox Margin="4" VerticalAlignment="Center" VerticalContentAlignment="Center"
+				Content="Управлять пылесосом" IsChecked="{Binding ControlVC}" />
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+			<CheckBox Grid.Column="0" x:Name="cbSendToUSB" Margin="4" VerticalAlignment="Center" VerticalContentAlignment="Center"
+					Content="Отправлять на USB flash с меткой тома" IsChecked="{Binding SendToUSB}" />
+			<TextBox Grid.Column="1" x:Name="txtUSBLabel" Margin="2" Padding="2" Text="{Binding USBLabel}" TextChanged="txtUSBLabel_TextChanged" />
+			<Button x:Name="btnBrowse" Grid.Column="3" Margin="2" Padding="2" Width="30" Content="..." ToolTip="Обзор" Click="btnBrowse_Click" />
+		</Grid>
+		<CheckBox Margin="4" VerticalAlignment="Center" VerticalContentAlignment="Center"
+				Content="Очистить USB flash перед отправкой" IsEnabled="{Binding ElementName=cbSendToUSB, Path=IsChecked}" IsChecked="{Binding ClearUSB}" />
+		<CheckBox Margin="4" VerticalAlignment="Center" VerticalContentAlignment="Center"
+				IsChecked="{Binding GotoXYZ}">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="По завершению вернуться в X" Margin="2" VerticalAlignment="Center" />
+				<TextBox x:Name="txtXEnd" Width="50" Margin="2" Text="{Binding XEnd}" VerticalAlignment="Center" />
+				<TextBlock Text="Y" Margin="2" VerticalAlignment="Center" />
+				<TextBox x:Name="txtYEnd" Width="50" Margin="2" Text="{Binding YEnd}" VerticalAlignment="Center" />
+				<TextBlock Text="Z" Margin="2" VerticalAlignment="Center" />
+				<TextBox x:Name="txtZEnd" Width="50" Margin="2" Text="{Binding ZEnd}" VerticalAlignment="Center" />
+			</StackPanel>
+		</CheckBox>
+		<CheckBox x:Name="cbProcessInstruments" Margin="4" VerticalAlignment="Center" VerticalContentAlignment="Center"
+						Content="Показывать порядок инструментов" IsChecked="{Binding ShowInstrumentsSequence}" />
+	</StackPanel>
+</UserControl>

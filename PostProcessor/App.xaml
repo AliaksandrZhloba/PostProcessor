@@ -1,0 +1,30 @@
+﻿<Application x:Class="PostProcessor.App"
+		   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		   xmlns:Cs="clr-namespace:PostProcessor.Converters"
+		   ShutdownMode="OnExplicitShutdown">
+
+	<Application.Resources>
+		<Cs:DriveInfoConverter x:Key="DriveInfoConverter" />
+		<Style x:Key="FlashDrivesMenuItemContainerStyle" TargetType="{x:Type MenuItem}">
+			<Style.Resources>
+				<Image Source="{Binding IconPath}" x:Key="IconImage" />
+			</Style.Resources>
+			<Setter Property="Header">
+				<Setter.Value>
+					<MultiBinding Converter="{StaticResource DriveInfoConverter}" >
+						<Binding Path="Name" />
+						<Binding Path="VolumeLabel" />
+					</MultiBinding>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="Icon" Value="{StaticResource IconImage}" />
+		</Style>
+
+		<Style x:Key="FlashDrivesContextMenuStyle" TargetType="{x:Type ContextMenu}">
+			<Setter Property="ItemContainerStyle" Value="{StaticResource FlashDrivesMenuItemContainerStyle}" />
+		</Style>
+	</Application.Resources>
+
+</Application>
+

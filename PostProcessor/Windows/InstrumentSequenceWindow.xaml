@@ -1,0 +1,16 @@
+﻿<Window x:Class="PostProcessor.Windows.InstrumentSequenceWindow"
+	   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	   Title="Инструменты" Width="420" SizeToContent="Height"
+	   WindowStartupLocation="CenterOwner">
+
+	<StackPanel Orientation="Vertical" Margin="4">
+		<StackPanel Orientation="Horizontal" Margin="0,20,0,20">
+			<TextBlock Margin="2" Padding="2" FontSize="14" Text="Инструмент:" />
+			<TextBlock x:Name="txtInstrumentNum" Margin="2" Padding="2" FontSize="14" Text="#/#" />
+			<TextBlock Margin="2" Padding="2" FontSize="14" Text=":" />
+			<TextBlock x:Name="txtInstrument" FontWeight="SemiBold" Margin="2" Padding="2" FontSize="14" Text="[Инструмент]" />
+		</StackPanel>
+		<Button x:Name="btnNext" Margin="4" Padding="8" Width="120" FontSize="14" HorizontalAlignment="Right" Content="Далее" Click="btnNext_Click" />
+	</StackPanel>
+</Window>

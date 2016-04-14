@@ -1,0 +1,35 @@
+﻿<Window x:Class="PostProcessor.Windows.ProcessWindow"
+	   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	   xmlns:UCs="clr-namespace:PostProcessor.UserControls"
+	   Title="Обработать файл" Width="420" SizeToContent="Height" ResizeMode="NoResize"
+	   WindowStartupLocation="CenterScreen"
+	   Icon="pack://application:,,,/PostProcessor;component\Resources/ProcessIcon.png"
+	   AllowDrop="True" Drop="ProcessWindow_Drop"
+	   Closing="ProcessWindow_Closing"
+	   FocusManager.FocusedElement="{Binding ElementName=btnProcess}"
+	   Activated="ProcessWindow_Activated">
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<StackPanel Grid.Row="0" x:Name="spParams" Orientation="Vertical" Margin="4">
+			<UCs:FilePathView x:Name="filePathView" Grid.Row="1" Margin="4" KeyboardNavigation.TabNavigation="None" />
+			<Separator Margin="0,4,0,4" />
+			<UCs:SelectMatherial x:Name="selectMatherial" Grid.Row="2" Margin="4" />
+			<Separator Margin="0,4,0,4" />
+			<UCs:ProcessSettingsView x:Name="processSettings" Margin="4" KeyboardNavigation.TabNavigation="None" />
+		</StackPanel>
+		<StackPanel Grid.Row="1" Margin="4" Orientation="Horizontal" HorizontalAlignment="Right">
+			<Button x:Name="btnProcess" Margin="4" Padding="8" Width="140" FontSize="14" Content="Обработать" Click="ProcessButton_Click" />
+		</StackPanel>
+		<StatusBar Grid.Row="2">
+			<StatusBarItem>
+				<TextBlock Margin="2" x:Name="txtStatus" />
+			</StatusBarItem>
+		</StatusBar>
+	</Grid>
+</Window>

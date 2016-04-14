@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="PostProcessor.UserControls.MatherialView"
+		   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="60" />
+			<ColumnDefinition />
+			<ColumnDefinition Width="60" />
+			<ColumnDefinition />
+			<ColumnDefinition Width="60" />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+		<TextBlock Grid.Column="0" Margin="2" Padding="2" TextAlignment="Right" Text="Speed:" />
+		<TextBox x:Name="txtSpeed" Grid.Column="1" Margin="2,0,2,0" Padding="2" TextAlignment="Left" Text="{Binding Speed, Mode=TwoWay}" GotFocus="txtSpeed_GotFocus" />
+		<TextBlock Grid.Column="2" Margin="2" Padding="2" TextAlignment="Right" Text="Fxy:" />
+		<TextBox x:Name="txtFxy" Grid.Column="3" Margin="2,0,2,0" Padding="2" TextAlignment="Left" Text="{Binding Fxy, Mode=TwoWay}" GotFocus="txtFxy_GotFocus" />
+		<TextBlock Grid.Column="4" Margin="2" Padding="2" TextAlignment="Right" Text="Fz:" />
+		<TextBox x:Name="txtFz" Grid.Column="5" Margin="2,0,2,0" Padding="2" TextAlignment="Left" Text="{Binding Fz, Mode=TwoWay}" GotFocus="txtFz_GotFocus" />
+	</Grid>
+</UserControl>

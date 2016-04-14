@@ -1,0 +1,19 @@
+﻿<Window x:Class="PostProcessor.Windows.MatherialsWindow"
+	   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	   xmlns:UCs="clr-namespace:PostProcessor.UserControls"
+	   Title="MatherialsWindow" Width="300" SizeToContent="Height" ResizeMode="NoResize"
+	   WindowStartupLocation="CenterScreen">
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<StackPanel Grid.Row="2" Margin="4" Orientation="Horizontal" HorizontalAlignment="Right">
+			<Button Margin="4" Padding="8" Width="120" FontSize="14" Content="Отмена" Click="CancelButton_Click" />
+			<Button Margin="4" Padding="8" Width="120" FontSize="14" Content="Применить" Click="ApplyButton_Click" />
+		</StackPanel>
+	</Grid>
+</Window>
