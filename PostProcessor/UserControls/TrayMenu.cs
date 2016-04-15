@@ -23,10 +23,10 @@ namespace PostProcessor.UserControls
 			ToolStripMenuItem mSettings = new ToolStripMenuItem("Настройки", PostProcessor.Properties.Resources.SettingsIcon);
 			mSettings.Click += delegate(object sender, EventArgs e) { SettingsClicked(); };
 
-			ToolStripMenuItem mMatherials = new ToolStripMenuItem("Материалы", PostProcessor.Properties.Resources.SettingsIcon);
+			ToolStripMenuItem mMatherials = new ToolStripMenuItem("Материалы", PostProcessor.Properties.Resources.SettingsIcon) { Enabled = false };
 			mMatherials.Click += delegate(object sender, EventArgs e) { MatherialsClicked(); };
 
-			ToolStripMenuItem mInstruments = new ToolStripMenuItem("Инструменты", PostProcessor.Properties.Resources.SettingsIcon);
+			ToolStripMenuItem mInstruments = new ToolStripMenuItem("Инструменты", PostProcessor.Properties.Resources.SettingsIcon) { Enabled = false };
 			mInstruments.Click += delegate(object sender, EventArgs e) { InstrumentsClicked(); };
 
 			ToolStripMenuItem mProcess = new ToolStripMenuItem("Обработать", PostProcessor.Properties.Resources.StartIcon);
