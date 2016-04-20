@@ -22,6 +22,7 @@ namespace PostProcessor
 	{
 		private const string MATHERIALS_FILE = "matherials.xml";
 		private const string INSTRUMENTS_FILE = "instruments.xml";
+		private const string MAILINFO_FILE = "MailInfo.xml";
 
 
 		private TrayIcon _tIcon;
@@ -35,6 +36,9 @@ namespace PostProcessor
 		private BindingList<Instrument> _instruments;
 
 		private string _appPath;
+
+		private MailInfo _mailInfo;
+
 
 
 		public bool IsBusy
@@ -98,9 +102,9 @@ namespace PostProcessor
 			Exception exception = e.ExceptionObject as Exception;
 			if (exception != null)
 			{
-				LogHelper.Logger.Fatal("Unhandled Exception");
-				LogHelper.Logger.Fatal("Message: {0}", exception.Message);
-				LogHelper.Logger.Fatal("StackTrace: {0}", exception.StackTrace);
+				LogHelper.GetLogger().Fatal("Unhandled Exception");
+				LogHelper.GetLogger().Fatal("Message: {0}", exception.Message);
+				LogHelper.GetLogger().Fatal("StackTrace: {0}", exception.StackTrace);
 
 				string message = exception.Message + Environment.NewLine + exception.StackTrace;
 
@@ -138,31 +142,54 @@ namespace PostProcessor
 				{
 					message = e.ExceptionObject.ToString();
 				}
-				LogHelper.Logger.Fatal(message, "Unhandled Exception, Unknown ExceptionObject");
+				LogHelper.GetLogger().Fatal(message, "Unhandled Exception, Unknown ExceptionObject");
 			}
 
-			LogHelper.Logger.Trace("Terminating...");
+			LogHelper.GetLogger().Trace("Terminating...");
 			LogHelper.Flush();
 
 			App.Current.Shutdown();
 		}
 
-		private static void SendErrorMessage(string message)
+
+		private void SendErrorMessage(string message)
 		{
 			SendingErrorMessageWindow sendingErrorWindow = null;
 
+			Dispatcher dispatcher = Dispatcher.CurrentDispatcher;
+
 			Task.Factory.StartNew(() =>
 			{
-				LogHelper.Logger.Trace("Sending mail.");
+				if (_mailInfo == null)
+				{
+					LogHelper.GetLogger().Trace("Loading mail info.");
+					try
+					{
+						_mailInfo = MailInfoHelper.LoadMailInfo(MAILINFO_FILE);
+					}
+					catch (Exception loadExceprion)
+					{
+						dispatcher.Invoke((Action)(() =>
+						{
+							LogHelper.GetLogger().Error("Can't load mail info: {0}", loadExceprion.Message);
+						}));
+						return;
+					}
+				}
+
+				dispatcher.Invoke((Action)(() =>
+					{
+						LogHelper.GetLogger().Trace("Sending mail.");
+						LogHelper.Flush();
+					}));
+
 				try
 				{
 					MailMessage mail = new MailMessage();
-					SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+					SmtpClient client = new SmtpClient(_mailInfo.SmtpClient, _mailInfo.Port);
 
-					// TODO Hide password
-
-					mail.From = new MailAddress("appserrormessages@gmail.com");
-					mail.To.Add("appserrormessages@gmail.com");
+					mail.From = new MailAddress(_mailInfo.MailAddress);
+					mail.To.Add(_mailInfo.MailAddress);
 					mail.Subject = "PostProcessor";
 					mail.Body = DateTime.Now.ToString() + Environment.NewLine + Environment.NewLine + message;
 					string logfilename = LogHelper.GetLogFileName();
@@ -175,21 +202,21 @@ namespace PostProcessor
 						catch (Exception attachingException)
 						{
 							mail.Body += Environment.NewLine + Environment.NewLine + "Failed attaching log file.";
-							LogHelper.Logger.Fatal("Error attaching file: {0}", attachingException.Message);
+							LogHelper.GetLogger().Fatal("Error attaching file: {0}", attachingException.Message);
 						}
 					}
 
-					SmtpServer.Port = 587;
-					SmtpServer.Credentials = new System.Net.NetworkCredential("appserrormessages", "aempassword");
-					SmtpServer.EnableSsl = true;
+					client.EnableSsl = true;
+					client.Credentials = new System.Net.NetworkCredential(_mailInfo.UserName, _mailInfo.UserPassword);
+					client.Timeout = 5000;
 
-					SmtpServer.Send(mail);
+					client.Send(mail);
 
-					LogHelper.Logger.Trace("Mail was sent.");
+					LogHelper.GetLogger().Trace("Mail was sent.");
 				}
 				catch (Exception ex)
 				{
-					LogHelper.Logger.Fatal("Error sending mail: {0}", ex.Message);
+					LogHelper.GetLogger().Fatal("Error sending mail: {0}", ex.Message);
 				}
 			})
 			.ContinueWith((Task task) =>
@@ -322,7 +349,7 @@ namespace PostProcessor
 			InstrumentHelper.SaveInstruments(Path.Combine(dir, INSTRUMENTS_FILE), _instruments);
 			MatherialHelper.SaveMatherials(Path.Combine(dir, MATHERIALS_FILE), _matherials);
 
-			LogHelper.Logger.Trace("Exit PostProcessor app.");
+			LogHelper.GetLogger().Trace("Exit PostProcessor app.");
 
 			Application.Current.Shutdown();
 		}

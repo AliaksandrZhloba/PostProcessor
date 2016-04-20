@@ -192,46 +192,46 @@ namespace PostProcessor.Entity
 				{
 					if (settings.ClearUSB)
 					{
-						LogHelper.Logger.Trace("Clearing USB...");
+						LogHelper.GetLogger().Trace("Clearing USB...");
 						DirectoryInfo di = new DirectoryInfo(settings.Drive);
 						foreach (FileInfo file in di.GetFiles())
 						{
-							LogHelper.Logger.Trace("Deleting file ({0})", file.FullName);
+							LogHelper.GetLogger().Trace("Deleting file ({0})", file.FullName);
 							file.Delete();
-							LogHelper.Logger.Trace("File deleted  ({0}).", file.FullName);
+							LogHelper.GetLogger().Trace("File deleted  ({0}).", file.FullName);
 						}
 						foreach (DirectoryInfo dir in di.GetDirectories())
 						{
-							LogHelper.Logger.Trace("Deleting directory ({0})", dir.FullName);
+							LogHelper.GetLogger().Trace("Deleting directory ({0})", dir.FullName);
 							dir.Delete(true);
-							LogHelper.Logger.Trace("Directory deleted  ({0}).", dir.FullName);
+							LogHelper.GetLogger().Trace("Directory deleted  ({0}).", dir.FullName);
 						}
-						LogHelper.Logger.Trace("USB Cleared.");
+						LogHelper.GetLogger().Trace("USB Cleared.");
 					}
 
 					string fname = Path.GetFileName(settings.FilePath);
 					string usbPath = Path.Combine(settings.Drive, fname);
 
-					LogHelper.Logger.Trace("Writing file ({0})", usbPath);
+					LogHelper.GetLogger().Trace("Writing file ({0})", usbPath);
 					File.WriteAllLines(usbPath, postLines);
-					LogHelper.Logger.Trace("File has been written ({0}).", usbPath);
+					LogHelper.GetLogger().Trace("File has been written ({0}).", usbPath);
 				}
 
 				string bakfile = settings.FilePath + ".bak";
 				if (File.Exists(bakfile))
 				{
-					LogHelper.Logger.Trace("Deleting .bak file ({0}).", bakfile);
+					LogHelper.GetLogger().Trace("Deleting .bak file ({0}).", bakfile);
 					File.Delete(bakfile);
-					LogHelper.Logger.Trace(".bak file deleted ({0}).", bakfile);
+					LogHelper.GetLogger().Trace(".bak file deleted ({0}).", bakfile);
 				}
 
-				LogHelper.Logger.Trace("Saving file as .bak file ({0}, {1}).", settings.FilePath, bakfile);
+				LogHelper.GetLogger().Trace("Saving file as .bak file ({0}, {1}).", settings.FilePath, bakfile);
 				File.Move(settings.FilePath, bakfile);
-				LogHelper.Logger.Trace("File saved as .bak file ({0}, {1}).", settings.FilePath, bakfile);
+				LogHelper.GetLogger().Trace("File saved as .bak file ({0}, {1}).", settings.FilePath, bakfile);
 
-				LogHelper.Logger.Trace("Writing file ({0})", settings.FilePath);
+				LogHelper.GetLogger().Trace("Writing file ({0})", settings.FilePath);
 				File.WriteAllLines(settings.FilePath, postLines);
-				LogHelper.Logger.Trace("File has been written ({0}).", settings.FilePath);
+				LogHelper.GetLogger().Trace("File has been written ({0}).", settings.FilePath);
 			}
 			catch (Exception)
 			{

@@ -13,12 +13,10 @@ namespace PostProcessor.Helpers
 {
 	public static class LogHelper
 	{
-		public static Logger Logger
+		public static Logger GetLogger()
 		{
-			get;
-			private set;
+			return LogManager.GetCurrentClassLogger();
 		}
-
 
 		public static void Initialize(string dir)
 		{
@@ -27,11 +25,10 @@ namespace PostProcessor.Helpers
 			target.FileName = Path.Combine(dir, filename);
 
 
-			Logger = LogManager.GetCurrentClassLogger();
-			LogHelper.Logger.Trace("==================== Run PostProcessor app. ====================");
-			Logger.Trace("Version: {0}", Environment.Version.ToString());
-			Logger.Trace("OS: {0}", Environment.OSVersion.ToString());
-			Logger.Trace("Command: {0}", Environment.CommandLine.ToString());
+			GetLogger().Trace("==================== Run PostProcessor app. ====================");
+			GetLogger().Trace("Version: {0}", Environment.Version.ToString());
+			GetLogger().Trace("OS: {0}", Environment.OSVersion.ToString());
+			GetLogger().Trace("Command: {0}", Environment.CommandLine.ToString());
 		}
 
 

@@ -104,7 +104,7 @@ namespace PostProcessor.UserControls
 
 		public void StartSearchUSB()
 		{
-			LogHelper.Logger.Trace("Start searching usb.");
+			LogHelper.GetLogger().Trace("Start searching usb.");
 
 			_cts = new CancellationTokenSource();
 			Task.Factory.StartNew((Action)(() =>
@@ -152,7 +152,7 @@ namespace PostProcessor.UserControls
 
 		public void StopSearchUSB()
 		{
-			LogHelper.Logger.Trace("Stop searching usb.");
+			LogHelper.GetLogger().Trace("Stop searching usb.");
 			_cts.Cancel();
 		}
 

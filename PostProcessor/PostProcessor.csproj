@@ -68,6 +68,7 @@
     </Page>
     <Compile Include="Converters\UIntConverter.cs" />
     <Compile Include="Converters\EnumToBooleanConverter .cs" />
+    <Compile Include="Entity\MailInfo.cs" />
     <Compile Include="Entity\OnFileDetectedActionType.cs" />
     <Compile Include="Entity\OnProgramErrorActionType.cs" />
     <Compile Include="Helpers\AF_FileAssociations.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Helpers\IconHelper.cs" />
     <Compile Include="Helpers\InstrumentHelper.cs" />
     <Compile Include="Helpers\LogHelper.cs" />
+    <Compile Include="Helpers\MailInfoHelper.cs" />
     <Compile Include="Helpers\MatherialHelper.cs" />
     <Compile Include="Helpers\DriveLabelHelper.cs" />
     <Compile Include="ProcessFileApp.cs" />
