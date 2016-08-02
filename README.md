@@ -7,7 +7,7 @@ Used packages:		NLog.4.1.2
   
   
 Description:  
-Programm is designed for optimizing g-code of CAM Software Editor's output file to prevent redundancy operations and also to have a possibility of fast setting's changing without changing settings of editor's internal postprocessor.    
+Program is designed for optimizing g-code of CAM Software Editor's output file to prevent redundancy operations and also to have a possibility of fast setting's changing without changing settings of editor's internal postprocessor.    
 Additional features:  
 1. Program can be associated with editor's output files.  
 2. Program can be minimized to tray and to rise when new editor's output file appeared in specified directory.  
